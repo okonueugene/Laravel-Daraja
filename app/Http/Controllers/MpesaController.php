@@ -6,31 +6,29 @@ use App\Models\Mpesa;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
 class MpesaController extends Controller
 {
-
     public function generateAccessToken()
     {
-        $consumer_key = 'YOUR_CONSUMER_KEY';//use the consumer key generated from your safaricom developer account stored in your .env file eg env('CONSUMER_KEY')
+        $consumer_key = env('CONSUMER_KEY');//use the consumer key generated from your safaricom developer account stored in your .env file eg env('CONSUMER_KEY')
 
-        $consumer_secret = 'your_consumer_secret';//use the consumer secret generated from your safaricom developer account stored in your .env file eg env('CONSUMER_SECRET')
+        $consumer_secret = env('CONSUMER_SECRET');//use the consumer secret generated from your safaricom developer account stored in your .env file eg env('CONSUMER_SECRET')
 
         $credentials = base64_encode($consumer_key.':'.$consumer_secret);
 
-        $url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+        $url = env('GENERATE_ACCESS_TOKEN_URL');
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic '.$credentials)); //setting a custom header
-        curl_setopt($curl , CURLOPT_HEADER, false);
-        curl_setopt($curl , CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl , CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $curl_response = curl_exec($curl);
         $access_token = json_decode($curl_response);
         return $access_token->access_token;
-        
-    } 
+
+    }
 
     public function createValidationResponse($result_code, $result_description)
     {
@@ -55,15 +53,15 @@ class MpesaController extends Controller
     public function mpesaRegisterUrls()
     {
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl');
-        curl_setopt($curl , CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer '. $this->generateAccessToken()));
+        curl_setopt($curl, CURLOPT_URL, env('MPESA_REGISTER_URLS_URL'));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization: Bearer '. $this->generateAccessToken()));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
-            'ShortCode' => 'YOUR_STORE_NUMBER',
-            'ResponseType' => 'Completed',
-            'ConfirmationURL' => "https://YOUR_CONFIRMATION_URL",
-            'ValidationURL' => "https://YOUR_VALIDATION_URL"
+            'ShortCode' => env('STORE_NUMBER'),
+            'ResponseType' => env('RESPONSE_TYPE'),
+            'ConfirmationURL' => env('CONFIRMATION_URL'),
+            'ValidationURL' => env('VALIDATION_URL')
         ]));
 
         $curl_response = curl_exec($curl);
