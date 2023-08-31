@@ -35,6 +35,7 @@ class MpesaC2BController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
+
             'ShortCode' => env('STORE_NUMBER'),
             'ResponseType' => env('RESPONSE_TYPE'),
             'ConfirmationURL' => env('CONFIRMATION_URL'),
