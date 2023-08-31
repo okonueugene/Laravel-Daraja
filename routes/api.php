@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MpesaController;
+use App\Http\Controllers\MpesaC2BController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,14 @@ Route::post('/deliverance/validation', [MpesaController::class, 'mpesaValidation
 Route::post('/deliverance/register/urls', [MpesaController::class, 'mpesaRegisterUrls']);
 Route::post('/deliverance/confirmation', [MpesaController::class, 'mpesaConfirmation']);
 Route::post('/deliverance/access/token', [MpesaController::class, 'generateAccessToken']);
+Route::post('/deliverance/stk/push', [MpesaController::class, 'stkPush']);
 
-
+//mpesa c2b routes
+Route::post('/deliverance/c2b/accesstoken', [MpesaC2BController::class, 'generateAccessToken']);
+Route::post('/deliverance/c2b/register', [MpesaC2BController::class, 'registerURLS']);
+Route::post('/deliverance/c2b/simulate', [MpesaC2BController::class, 'simulateTransaction']);
+Route::post('/deliverance/c2b/confirmation', [MpesaC2BController::class, 'confirmTransaction']);
+Route::post('/deliverance/c2b/validation', [MpesaC2BController::class, 'validation']);
+Route::post('/deliverance/c2b/callback', [MpesaC2BController::class, 'callBack']);
+Route::post('/deliverance/c2b/timeout', [MpesaC2BController::class, 'timeout']);
+Route::post('/deliverance/c2b/result', [MpesaC2BController::class, 'result']);

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,20 +14,14 @@ return new class extends Migration
     {
         Schema::create('mpesa_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('FirstName')->nullable();
-            $table->string('MiddleName')->nullable();
-            $table->string('LastName')->nullable();
-            $table->string('TransactionType')->nullable();
-            $table->string('TransID')->nullable();
-            $table->string('TransTime')->nullable();
-            $table->string('BusinessShortCode')->nullable();
-            $table->string('BillRefNumber')->nullable();
-            $table->string('InvoiceNumber')->nullable();
-            $table->string('ThirdPartyTransID')->nullable();
-            $table->string('MSISDN')->nullable();
-            $table->string('TransAmount')->nullable();
-            $table->string('OrgAccountBalance')->nullable();
-            $table->softDeletes();
+            $table->string('MerchantRequestID')->nullable();
+            $table->string('CheckoutRequestID')->nullable();
+            $table->string('ResultCode')->nullable();
+            $table->string('ResultDesc')->nullable();
+            $table->string('Amount')->nullable();
+            $table->string('MpesaReceiptNumber')->nullable();
+            $table->string('TransactionDate')->nullable();
+            $table->string('PhoneNumber')->nullable();
             $table->timestamps();
         });
     }

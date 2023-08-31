@@ -10,19 +10,17 @@ class Mpesa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'FirstName',
-        'MiddleName',
-        'LastName',
-        'TransactionType',
-        'TransID',
-        'TransTime',
-        'BusinessShortCode',
-        'BillRefNumber',
-        'InvoiceNumber',
-        'ThirdPartyTransID',
-        'MSISDN',
-        'TransAmount',
-        'OrgAccountBalance',
+        'MerchantRequestID',
+        'CheckoutRequestID',
+        'ResultCode',
+        'ResultDesc',
+        'Amount',
+        'MpesaReceiptNumber',
+        'Balance',
+        'TransactionDate',
+        'PhoneNumber',
     ];
-    
+
+    protected $table = 'mpesa_transactions';
+
 }
