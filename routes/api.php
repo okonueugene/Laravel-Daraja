@@ -21,18 +21,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //do not use mpesa as the prefix for your routes
-Route::post('/deliverance/validation', [MpesaController::class, 'mpesaValidation']);
-Route::post('/deliverance/register/urls', [MpesaController::class, 'mpesaRegisterUrls']);
-Route::post('/deliverance/confirmation', [MpesaController::class, 'mpesaConfirmation']);
-Route::post('/deliverance/access/token', [MpesaController::class, 'generateAccessToken']);
-Route::post('/deliverance/stk/push', [MpesaController::class, 'stkPush']);
+Route::post('/validation', [MpesaController::class, 'mpesaValidation']);
+Route::post('/register/urls', [MpesaController::class, 'mpesaRegisterUrls']);
+Route::post('/confirmation', [MpesaController::class, 'mpesaConfirmation']);
+Route::post('/access/token', [MpesaController::class, 'generateAccessToken']);
+Route::post('/stk/push', [MpesaController::class, 'stkPush']);
 
 //mpesa c2b routes
-Route::post('/deliverance/c2b/accesstoken', [MpesaC2BController::class, 'generateAccessToken']);
-Route::post('/deliverance/c2b/register', [MpesaC2BController::class, 'registerURLS']);
-Route::post('/deliverance/c2b/simulate', [MpesaC2BController::class, 'simulateTransaction']);
-Route::post('/deliverance/c2b/confirmation', [MpesaC2BController::class, 'confirmTransaction']);
-Route::post('/deliverance/c2b/validation', [MpesaC2BController::class, 'validation']);
-Route::post('/deliverance/c2b/callback', [MpesaC2BController::class, 'callBack']);
-Route::post('/deliverance/c2b/timeout', [MpesaC2BController::class, 'timeout']);
-Route::post('/deliverance/c2b/result', [MpesaC2BController::class, 'result']);
+Route::post('/c2b/accesstoken', [MpesaC2BController::class, 'generateAccessToken']);
+Route::post('/c2b/register', [MpesaC2BController::class, 'registerURLS']);
+Route::post('/c2b/simulate', [MpesaC2BController::class, 'simulateTransaction']);
+Route::post('/c2b/confirmation', [MpesaC2BController::class, 'confirmTransaction']);
+Route::post('/c2b/validation', [MpesaC2BController::class, 'validation']);
+Route::post('/c2b/callback', [MpesaC2BController::class, 'callBack']);
+Route::post('/c2b/timeout', [MpesaC2BController::class, 'timeout']);
+Route::post('/c2b/result', [MpesaC2BController::class, 'result']);
