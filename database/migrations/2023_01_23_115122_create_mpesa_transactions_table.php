@@ -22,6 +22,7 @@ return new class () extends Migration {
             $table->string('MpesaReceiptNumber')->nullable();
             $table->string('TransactionDate')->nullable();
             $table->string('PhoneNumber')->nullable();
+            $table->string('Token')->nullable();
             $table->timestamps();
         });
     }

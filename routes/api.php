@@ -25,7 +25,7 @@ Route::post('/validation', [MpesaController::class, 'mpesaValidation']);
 Route::post('/register/urls', [MpesaController::class, 'mpesaRegisterUrls']);
 Route::post('/confirmation', [MpesaController::class, 'mpesaConfirmation']);
 Route::post('/access/token', [MpesaController::class, 'generateAccessToken']);
-Route::post('/stk/push', [MpesaController::class, 'stkPush']);
+Route::post('/stk/push/', [MpesaController::class, 'stkPush'])->name('stkpush');
 
 //mpesa c2b routes
 Route::post('/c2b/accesstoken', [MpesaC2BController::class, 'generateAccessToken']);

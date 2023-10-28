@@ -44,8 +44,11 @@ class MpesaController extends Controller
     }
 
 
-    public function stkPush()
+    public function stkPush(Request $request)
     {
+        //Retrieve the phone number and the amount from the request
+        $phone_number = $request->phoneNumber;
+        $amount = $request->amount;
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->generateAccessToken(),
@@ -55,11 +58,11 @@ class MpesaController extends Controller
             'Password' => base64_encode(env('STORE_NUMBER') . env('PASSKEY') . date("YmdHis")),
             'Timestamp' => date("YmdHis"),
             'TransactionType' => 'CustomerPayBillOnline',
-            'Amount' => '100000',
+            'Amount' => $amount,
             'PartyA' => env('PHONE_NUMBER'),
             'PartyB' => env('STORE_NUMBER'),
-            'PhoneNumber' => env('PHONE_NUMBER'),
-            'CallBackURL' => 'https://sandbox.optitech.co.ke/api/deliverance/confirmation',
+            'PhoneNumber' => $phone_number,
+            'CallBackURL' => 'https://app.askaritechnologies.com/api/shop/callback?token=5f1a2b3c4d56f7g8h9i',
             'AccountReference' => "Test",
             'TransactionDesc' => "Test"
         ]);
@@ -76,7 +79,6 @@ class MpesaController extends Controller
         // Check if "ResultCode" is present in the response
         if (isset($content->Body->stkCallback->ResultCode)) {
             $resultCode = $content->Body->stkCallback->ResultCode;
-            dd($resultCode);
 
             if ($resultCode === 0) {
                 // The request was successful
